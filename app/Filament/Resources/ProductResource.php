@@ -45,14 +45,17 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->searchable(),
-                TextColumn::make('slug')->searchable(),
-                TextColumn::make('content')->searchable(),
+                TextColumn::make('title')->sortable()->searchable(),
+                TextColumn::make('slug')->sortable()->searchable(),
+                TextColumn::make('content')->sortable()->searchable(),
                 TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
                 TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
             ])
+            ->defaultSort('title','asc')
             ->filters([
                 //
             ])
