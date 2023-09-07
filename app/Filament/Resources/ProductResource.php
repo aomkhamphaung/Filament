@@ -47,20 +47,25 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('title')
                             ->sortable()
+                            ->toggleable()
                             ->searchable(),
                 TextColumn::make('slug')
+                            ->toggleable()
                             ->sortable()
                             ->searchable(),
                 TextColumn::make('content')
                             ->limit(30)
                             ->tooltip(fn($record) : string => $record->content)
                             ->sortable()
+                            ->toggleable(isToggledHiddenByDefault: true)
                             ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
+                    ->toggleable()
                     ->sortable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
+                    ->toggleable()
                     ->sortable(),
             ])
             ->defaultSort('title','asc')
