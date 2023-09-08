@@ -26,7 +26,7 @@ class FilamentServiceProvider extends ServiceProvider
     {
         Filament::serving(function(){
             if(auth()->user()){
-                if(auth()->user()->is_admin === 1 && auth()->user()->hasAnyRole(['super-admin', 'moderator'])){
+                if(auth()->user()->is_admin === 1 && auth()->user()->hasAnyRole(['super-admin', 'admin'])){
                     Filament::registerUserMenuItems([
                         UserMenuItem::make()
                                     ->label('Manage Users')

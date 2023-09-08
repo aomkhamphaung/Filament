@@ -68,6 +68,22 @@ class RolesAndPermissionsSeeder extends Seeder
             $adminPermission1,
             $adminPermission2,
         ]);
+        $adminRole = Role::create(['name' => 'admin'])->syncPermissions([
+            $userPermission1,
+            $userPermission2,
+            $userPermission3,
+            $userPermission4,
+            $rolePermission1,
+            $rolePermission2,
+            $rolePermission3,
+            $rolePermission4,
+            $permission1,
+            $permission2,
+            $permission3,
+            $permission4,
+            $adminPermission1,
+            $adminPermission2,
+        ]);
         $moderatorRole = Role::create(['name' => 'moderator'])->syncPermissions([
             $userPermission2,
             $rolePermission2,
@@ -88,6 +104,15 @@ class RolesAndPermissionsSeeder extends Seeder
         ])->assignRole($superAdminRole);
 
         User::create([
+            'name' => 'admin',
+            'is_admin' => 1,
+            'email' => 'admin@admin.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ])->assignRole($adminRole);
+
+        User::create([
             'name' => 'moderator',
             'is_admin' => 1,
             'email' => 'moderator@admin.com',
@@ -103,7 +128,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-        ])->assignRole($moderatorRole);
+        ])->assignRole($developerRole);
 
         for($i = 1; $i < 50; $i++){
             User::create([
